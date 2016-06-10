@@ -61,7 +61,7 @@ void loop() {
   log_file = SD.open("log.csv", FILE_WRITE);
 
   //read from sensors
-  for(unsigned int i=0; i < 6; ++i) array[i] = analogRead(i);
+  for(unsigned int i=0; i < 6; ++i) sensor_array[i] = analogRead(i);
 
   // update GPS
   while(gps_port.available()) gps.encode(gps_port.read());
