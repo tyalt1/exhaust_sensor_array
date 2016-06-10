@@ -8,7 +8,7 @@
 
 // GPS
 #include <SoftwareSerial.h>
-#include "TinyGPS.h"
+#include "TinyGPSPlus/TinyGPS++.h"
 #define GPS_RX           9 // Arduino RX pin connected to GPS TX
 #define GPS_TX           8 // Arduino TX pin connected to GPS RX
 #define GPS_BAUD_RATE 9600 // The GPS Shield module defaults to 9600 baud
