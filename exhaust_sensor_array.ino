@@ -24,11 +24,6 @@ TinyGPSPlus gps;
 int sensor_array[6];
 File log_file;
 
-void read_sensors() {
-
-  for(unsigned int i=0; i < 6; ++i) array[i] = analogRead(i);
-}
-
 void print() {
 
   log_file.print(gps.location.lat(), 6);
@@ -66,7 +61,7 @@ void loop() {
   log_file = SD.open("log.csv", FILE_WRITE);
 
   //read from sensors
-  read_sensors();
+  for(unsigned int i=0; i < 6; ++i) array[i] = analogRead(i);
 
   // update GPS
   while(gps_port.available()) gps.encode(gps_port.read());
