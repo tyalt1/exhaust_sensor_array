@@ -43,16 +43,23 @@ void print() {
   log_file.print(gps.date.year());
   log_file.print(',');
   log_file.print(gps.speed.mph());
+  log_file.print(',');
+  log_file.print(map(CO,  0, 1023, 20,  2000)); //ppm
+  log_file.print(',');
+  log_file.print(map(CO2, 0, 1023,  0, 10000)); //ppm
+  log_file.print(',');
+  log_file.print(map(O3,  0, 1023, 10,  2000)); //ppb
+  log_file.print(',');
+  log_file.print(map(NO,  0, 1023, 50, 10000)); //ppb
 
-  // TODO add sensors
-
-  log_file.println()
+  // TODO add temp and wind
+  log_file.println();
 }
 
 void setup() {
 
   gps.begin(GPS_BAUD_RATE); //GPS Setup
-  SD.begin(SD_PIN)          //SD card start
+  SD.begin(SD_PIN);         //SD card start
 }
 
 void loop() {
