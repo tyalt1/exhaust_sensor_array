@@ -51,8 +51,10 @@ void print() {
   log_file.print(map(O3,  0, 1023, 10,  2000)); //ppb
   log_file.print(',');
   log_file.print(map(NO,  0, 1023, 50, 10000)); //ppb
-
-  // TODO add temp and wind
+  log_file.print(',');
+  log_file.print(map(TEMP, 0, 1023 , 0, 0)); // TODO find temp range
+  log_file.print(',');
+  log_file.print(map(WIND, 0, 1023 , 0, 0)); // TODO find wind range
   log_file.println();
 }
 
