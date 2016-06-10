@@ -31,7 +31,27 @@ void read_sensors() {
 
 void print() {
 
+  log_file.print(gps.location.lat(), 6);
+  log_file.print(',');
+  log_file.print(gps.location.lng(), 6);
+  log_file.print(',');
+  log_file.print(gps.time.hour());
+  log_file.print(',');
+  log_file.print(gps.time.minute());
+  log_file.print(',');
+  log_file.print(gps.time.second());
+  log_file.print(',');
+  log_file.print(gps.date.day());
+  log_file.print(',');
+  log_file.print(gps.date.month());
+  log_file.print(',');
+  log_file.print(gps.date.year());
+  log_file.print(',');
+  log_file.print(gps.speed.mph());
 
+  // TODO add sensors
+
+  log_file.println()
 }
 
 void setup() {
@@ -51,20 +71,5 @@ void loop() {
   // update GPS
   while(gps_port.available()) gps.encode(gps_port.read());
 
-  // TODO read from GPS
-  // gps.date.month()
-  // gps.date.day()
-  // gps.date.year()
-  // gps.time.hour()
-  // gps.time.minute()
-  // gps.time.second()
-  // gps.location.lat() in base6
-  // gps.location.lng() in base6
-  // gps.altitude.feet()
-  // gps.course.degree()
-  // gps.speed.mph()
-  // gps.satellites.value()
-
-  // TODO write to uSD card
   print();
 }
