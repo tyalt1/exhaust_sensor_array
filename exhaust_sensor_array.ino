@@ -52,9 +52,9 @@ void print() {
   log_file.print(',');
   log_file.print(map(NO,  0, 1023, 50, 10000)); //ppb
   log_file.print(',');
-  log_file.print(map(TEMP, 0, 1023 , 0, 0)); // TODO find temp range
+  log_file.print(map(TEMP, 0, 1023 , -40, 125)); // celsius
   log_file.print(',');
-  log_file.print(map(WIND, 0, 1023 , 0, 0)); // TODO find wind range
+  log_file.print(map(WIND, 0, 1023 , -40, 85)); // celsius
   log_file.println();
 }
 
