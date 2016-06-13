@@ -21,44 +21,57 @@ TinyGPSPlus gps;
 #define SD_pin 10
 
 // code!
+// #define DEBUG
+#ifdef DEBUG
+#define print   Serial.print
+#define println Serial.println
+#else
+#define print   log_file.print
+#define println log_file.println
+#endif
+
 int sensor_array[6];
 File log_file;
 
-void print() {
+void print_log() {
 
-  log_file.print(gps.location.lat(), 6);
-  log_file.print(',');
-  log_file.print(gps.location.lng(), 6);
-  log_file.print(',');
-  log_file.print(gps.time.hour());
-  log_file.print(',');
-  log_file.print(gps.time.minute());
-  log_file.print(',');
-  log_file.print(gps.time.second());
-  log_file.print(',');
-  log_file.print(gps.date.day());
-  log_file.print(',');
-  log_file.print(gps.date.month());
-  log_file.print(',');
-  log_file.print(gps.date.year());
-  log_file.print(',');
-  log_file.print(gps.speed.mph());
-  log_file.print(',');
-  log_file.print(map(CO,  0, 1023, 20,  2000)); //ppm
-  log_file.print(',');
-  log_file.print(map(CO2, 0, 1023,  0, 10000)); //ppm
-  log_file.print(',');
-  log_file.print(map(O3,  0, 1023, 10,  2000)); //ppb
-  log_file.print(',');
-  log_file.print(map(NO,  0, 1023, 50, 10000)); //ppb
-  log_file.print(',');
-  log_file.print(map(TEMP, 0, 1023 , -40, 125)); // celsius
-  log_file.print(',');
-  log_file.print(map(WIND, 0, 1023 , -40, 85)); // celsius
-  log_file.println();
+  print(gps.location.lat(), 6);
+  print(',');
+  print(gps.location.lng(), 6);
+  print(',');
+  print(gps.time.hour());
+  print(',');
+  print(gps.time.minute());
+  print(',');
+  print(gps.time.second());
+  print(',');
+  print(gps.date.day());
+  print(',');
+  print(gps.date.month());
+  print(',');
+  print(gps.date.year());
+  print(',');
+  print(gps.speed.mph());
+  print(',');
+  print(map(CO,  0, 1023, 20,  2000)); //ppm
+  print(',');
+  print(map(CO2, 0, 1023,  0, 10000)); //ppm
+  print(',');
+  print(map(O3,  0, 1023, 10,  2000)); //ppb
+  print(',');
+  print(map(NO,  0, 1023, 50, 10000)); //ppb
+  print(',');
+  print(map(TEMP, 0, 1023 , -40, 125)); // celsius
+  print(',');
+  print(map(WIND, 0, 1023 , -40, 85)); // celsius
+  println();
 }
 
 void setup() {
+
+  #ifdef DEBUG
+  Serial.begin(9600);
+  #endif
 
   gps.begin(GPS_BAUD_RATE); //GPS Setup
   SD.begin(SD_PIN);         //SD card start
@@ -66,9 +79,12 @@ void setup() {
 
 void loop() {
 
+  #ifdef DEBUG
+  delay(10);
+  #else
   delay(5000);
-
   log_file = SD.open("log.csv", FILE_WRITE);
+  #endif
 
   // update GPS
   while(gps_port.available()) gps.encode(gps_port.read());
@@ -76,5 +92,5 @@ void loop() {
   //read from sensors
   for(unsigned int i=0; i < 6; ++i) sensor_array[i] = analogRead(i);
 
-  print();
+  print_log();
 }
