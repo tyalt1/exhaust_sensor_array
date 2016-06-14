@@ -18,7 +18,7 @@ TinyGPSPlus gps;
 // SD card
 #include <SD.h>
 #include <SPI.h>
-#define SD_pin 10
+#define SD_PIN 10
 
 // code!
 // #define DEBUG
@@ -63,7 +63,7 @@ void print_log() {
   print(',');
   print(map(TEMP, 0, 1023 , -40, 125)); // celsius
   print(',');
-  print(map(WIND, 0, 1023 , -40, 85)); // celsius
+  print(map(WIND, 0, 1023 , 0, 100)); // meter per second
   println();
 }
 
