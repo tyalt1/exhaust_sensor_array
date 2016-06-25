@@ -30,11 +30,10 @@ TinyGPSPlus gps;
 #endif
 
 int sensor_array[6];
-File log_file;
 
 void print_log() {
 
-  log_file = SD.open("log.csv", FILE_WRITE);
+  File log_file = SD.open("log.csv", FILE_WRITE);
 
   print(gps.location.lat(), 6);
   print(',');
