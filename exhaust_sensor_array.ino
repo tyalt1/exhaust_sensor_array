@@ -79,6 +79,13 @@ void setup() {
   digitalWrite(SD_PIN, HIGH);
   SD.begin(SD_PIN);
 //  if( !SD.begin(SD_PIN) ) Serial.println("ERROR: SD failure");
+  
+  //print header
+  if(!SD.exsists("log.csv")) {
+    File log_file = SD.open("log.csv", FILE_WRITE);
+    log_file.println("latitude,longitude,hour,minute,second,day,month,year,speed (in mph),CO (in ppm),CO2 (in ppm),O3 (in ppb),NO (in ppb),tempurature (in celsius),wind speed (in meters per second)");
+    log_file.close();
+  }
 }
 
 void loop() {
