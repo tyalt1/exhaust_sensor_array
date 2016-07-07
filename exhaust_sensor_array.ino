@@ -29,6 +29,7 @@ TinyGPSPlus gps;
 #define fprintln log_file.println
 #endif
 
+const int analog[] = {A0, A1, A2, A3, A4, A5};
 int sensor_array[6];
 
 void print_log() {
@@ -97,7 +98,7 @@ void loop() {
   while(gps_port.available()) gps.encode(gps_port.read());
 
   //read from sensors
-  for(unsigned int i=0; i < 6; ++i) sensor_array[i] = analogRead(i);
+  for(unsigned int i=0; i < 6; ++i) sensor_array[i] = analogRead(analog[i]);
 
   print_log();
 }
